@@ -146,21 +146,14 @@ app.post("/guestbook", function (request, response) {
   });
 });
 
-// Display ALL saved comments from DB table "comments"
-/* app.get("/", function (request, response) {
-  connectDB.connect(function (error) {
-    const retriveComments = `SELECT * FROM comments`;
-    connectDB.query(retriveComments, function (error, results) {
-      console.log(results);
-      if (error) {
-        console.log("Error with retriving comments", error);
-        response.send(
-          "We are having trouble showing you the comments, sorry for that!"
-        );
-      } else {
-        response.render("welcome", { comments: results });
-      }
-    });
+//logout
+
+app.get("/logout", function (request, response) {
+  request.session.destroy(function (error) {
+    if (error) {
+      console.log("Logout not possible, your are here forever.", error);
+    }
+    response.sendFile(path.join(__dirname + "/index.html"));
+    console.log("User logged out");
   });
 });
- */

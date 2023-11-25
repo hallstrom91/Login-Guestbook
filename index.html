@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="style.css" />
     <title>Index - Login</title>
   </head>
-  <body>
+  <body class="lightMode">
+    <!--Container for login function-->
     <div id="login" class="container-login">
       <h2>Logga In!</h2>
+      <!--Form to login w user in mySQL DB-->
       <form action="/login" method="post">
         <input
           class="defaultInput"
@@ -24,11 +26,26 @@
           name="password"
           placeholder="Password"
         />
+        <label class="viewPW" for="viewPassword">Visa Lösenord</label>
+        <!--Show password checkbox-->
+        <input type="checkbox" id="viewPassword" class="viewPW" />
         <input class="submitBtn" type="submit" value="Login" />
       </form>
+      <!--Button to show register box-->
+
+      <input
+        type="button"
+        value="Registrera Konto!"
+        class="button"
+        id="regPopUp"
+      />
     </div>
-    <div id="register" class="container-register">
+    <!--Container for register function-->
+    <div id="register" class="hidden">
+      <!--Button to close register-box-->
+      <input class="button" type="button" value="Stäng" id="closeReg" />
       <h2>Registrera Konto!</h2>
+      <!--Form to register user to mySQL DB-->
       <form action="/register" method="post">
         <input
           class="defaultInput"
@@ -56,6 +73,14 @@
         />
         <input class="submitBtn" type="submit" value="Registrera" />
       </form>
+    </div>
+    <!--Switchbutton for dark/light mode-->
+    <div class="switchContainer">
+      <p class="darkmodeText">DarkMode</p>
+      <label for="switchBtn" class="switch">
+        <input type="checkbox" id="switchBtn" />
+        <span class="switchSlide"></span>
+      </label>
     </div>
     <!--JS File Import-->
     <script src="main.js"></script>

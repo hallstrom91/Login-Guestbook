@@ -3,11 +3,39 @@
 General Settings
 =================================
 */
+@import url("https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&display=swap");
+
+body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  background-color: whitesmoke;
+}
+
 .defaultInput {
   display: block;
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
+}
+.button {
+  padding: 10px;
+  border: 2px solid rgb(14, 154, 247);
+  background-color: rgb(8, 73, 117);
+  color: whitesmoke;
+  border-radius: 5px;
+}
+
+h2 {
+  font-family: "kdam thmor pro", sans-serif;
+  margin-left: 0vw;
+}
+
+label {
+  float: left;
+  margin-left: 0.5vw;
 }
 
 /*
@@ -21,18 +49,35 @@ Login / Register Page
   display: block;
   padding: 5px;
   margin: 10px;
-  margin-left: 12vw;
+  margin-left: 8vw;
+  border: 2px solid rgb(14, 154, 247);
+  background-color: rgb(8, 73, 117);
+  color: whitesmoke;
 }
 
 .container-login {
-  border: 1px solid black;
+  grid-area: 1 / 2 / 2 / 4;
+  margin-top: 40px;
+  padding: 10px;
   margin: 20px;
 }
 
 .container-register {
-  border: 1px solid black;
+  grid-area: 2 / 2 / 3 / 4;
   margin: 20px;
+  border-top: thick double black;
 }
+
+.hidden {
+  display: none;
+}
+
+#closeReg {
+  display: flex;
+  margin-left: 92%;
+  margin-top: 1%;
+}
+
 /*
 =================================
 Userpage (welcome.ejs)
@@ -45,4 +90,94 @@ Userpage (welcome.ejs)
   padding: 5px;
   margin: 5px;
   height: 5vh;
+}
+#welcome {
+  grid-area: 1 / 2 / 2 / 4;
+}
+
+#commentInput {
+  grid-area: 2 / 1 / 4 / 2;
+}
+
+#storedComments {
+  grid-area: 1 / 4 / 5 / 5;
+}
+/*
+========================
+Dark and Light Mode !
+========================
+*/
+
+.darkmodeText {
+  font-size: 12px;
+}
+.switchContainer {
+  grid-area: 1 / 4 / 2 / 5;
+  margin-top: 10%;
+  margin-left: 50%;
+}
+
+.lightMode {
+  background-color: whitesmoke;
+  color: black;
+}
+
+.darkMode {
+  background-color: rgb(62, 62, 62);
+  color: whitesmoke;
+}
+
+/* Button Settings for Dark & Light Mode */
+
+.switch {
+  margin-top: 5px;
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  border: 1px solid rgb(14, 154, 247);
+}
+
+.switchContainer input {
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.switchSlide {
+  position: absolute;
+  cursor: pointer;
+  background-color: rgb(62, 62, 62);
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.switchSlide::before {
+  position: absolute;
+  content: "";
+  background-color: whitesmoke;
+  height: 17px;
+  width: 15px;
+  left: 4px;
+  right: 4px;
+  bottom: 4px;
+  transition: 0.3s;
+}
+
+input:checked + .switchSlide {
+  background-color: rgb(62, 62, 62);
+}
+
+input:focus + .switchSlide {
+  box-shadow: 0 0 1px grey;
+}
+
+input:checked + .switchSlide::before {
+  -webkit-transform: translateX(25px);
+  -ms-transform: translateX(25px);
+  transform: translateX(25px);
 }

@@ -11,6 +11,9 @@
       <!--Display Username after login thru ejs-->
       <h1>Welcome, <%= username %></h1>
       <h2>TO YOUR LOGGED IN PAGE!</h2>
+      <form action="/logout" method="get">
+        <input class="button" type="submit" value="Logga ut" />
+      </form>
     </div>
     <!--Leave a comment in Guestbook section-->
     <div id="commentInput">
@@ -30,6 +33,7 @@
         <input class="submitBtn" type="submit" value="Skicka" />
       </form>
     </div>
+    <!--Stored Comments retrived from SQL DB-->
     <div id="storedComments">
       <% comments.forEach(comment => { %>
       <p><%= comment.name %></p>
