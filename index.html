@@ -7,23 +7,54 @@
     <title>Index - Login</title>
   </head>
   <body>
-    <div id="login" class="container">
+    <div id="login" class="container-login">
+      <h2>Logga In!</h2>
       <form action="/login" method="post">
         <input
-          class="inputLogin"
+          class="defaultInput"
           id="username"
           type="text"
           name="username"
           placeholder="Username"
         />
         <input
-          class="inputLogin"
+          class="defaultInput"
           id="password"
           type="password"
           name="password"
           placeholder="Password"
         />
-        <input class="inputLoginBtn" type="submit" value="Login" />
+        <input class="submitBtn" type="submit" value="Login" />
+      </form>
+    </div>
+    <div id="register" class="container-register">
+      <h2>Registrera Konto!</h2>
+      <form action="/register" method="post">
+        <input
+          class="defaultInput"
+          type="text"
+          name="name"
+          placeholder="Ditt Namn"
+        />
+        <input
+          class="defaultInput"
+          type="text"
+          name="newuser"
+          placeholder="Önskat användarnamn"
+        />
+        <input
+          class="defaultInput"
+          type="password"
+          name="newpassword"
+          placeholder="Lösenord"
+        />
+        <input
+          class="defaultInput"
+          type="email"
+          name="email"
+          placeholder="Din epost"
+        />
+        <input class="submitBtn" type="submit" value="Registrera" />
       </form>
     </div>
     <!--JS File Import-->

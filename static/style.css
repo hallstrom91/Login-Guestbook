@@ -1,17 +1,22 @@
 /*
 =================================
-Login Page and Inputfields
+General Settings
 =================================
 */
-
-.inputLogin {
+.defaultInput {
   display: block;
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
 }
 
-.inputLoginBtn {
+/*
+=================================
+Login / Register Page
+=================================
+*/
+
+.submitBtn {
   border-radius: 10px;
   display: block;
   padding: 5px;
@@ -19,14 +24,25 @@ Login Page and Inputfields
   margin-left: 12vw;
 }
 
+.container-login {
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.container-register {
+  border: 1px solid black;
+  margin: 20px;
+}
 /*
 =================================
 Userpage (welcome.ejs)
 =================================
 */
-.inputComment {
+
+.inputCommentText {
   display: block;
   border-radius: 10px;
   padding: 5px;
   margin: 5px;
+  height: 5vh;
 }

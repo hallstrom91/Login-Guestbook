@@ -4,6 +4,11 @@ const express = require("express");
 const session = require("express-session");
 const path = require("path");
 const ejs = require("ejs");
+const app = express();
+const port = 8080;
+
+app.listen(port);
+app.set("view engine", "ejs");
 
 //Establish connection to mySQL DB.
 const connectDB = mysql.createConnection({
@@ -21,12 +26,12 @@ connectDB.connect((error) => {
   }
 });
 
-// init express env
+/* // init express env
 const app = express();
-const port = 8080;
+const port = 8080; */
 
-app.listen(port);
-app.set("view engine", "ejs");
+/* app.listen(port);
+app.set("view engine", "ejs"); */
 
 app.use(
   session({
@@ -39,7 +44,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "static")));
 
-// load loginpage
+// load HTML pages
 app.get("/", function (request, response) {
   response.sendFile(path.join(__dirname + "/index.html"));
 });
@@ -58,7 +63,7 @@ app.post("/login", function (request, response) {
   if (username && password) {
     // connection to DB
     connectDB.query(
-      "SELECT * FROM users WHERE username = ? AND password = ?",
+      "SELECT * FROM register WHERE username = ? AND password = ?",
       [username, password],
       function (error, results, fields) {
         if (error) throw error;
@@ -79,32 +84,83 @@ app.post("/login", function (request, response) {
   }
 });
 
+// load welcome page from views-folder in .ejs format for logged in user and show saved comments
 app.get("/welcome", function (request, response) {
   if (request.session.loggedin) {
-    response.render("welcome", { username: request.session.username });
+    connectDB.connect(function (error) {
+      const retriveComments = `SELECT * FROM comments`;
+      connectDB.query(retriveComments, function (error, results) {
+        if (error) {
+          console.log("Error with retriving comments", error);
+          response.send("We cant retrive comments at this moment.");
+        } else {
+          response.render("welcome", {
+            username: request.session.username,
+            comments: results,
+          });
+        }
+      });
+    });
   } else {
     response.redirect("/login");
   }
 });
 
-//redirect to user-page
-/* app.get("/welcome", function (request, response) {
-  if (request.session.loggedin) {
-    response.sendFile(path.join(__dirname + "/welcome.html"));
-    response.send("Hello" + request.session.username);
-  } else {
-    response.send("You are not welcome!");
-  }
-  response.end();
-}); */
+// registration function w (little) SQL-injection protection thru prepared statements
+app.post("/register", function (request, response) {
+  connectDB.connect(function (error) {
+    const registerUser = `INSERT INTO register (name, username, password, email)
+    VALUES (?, ?, ?, ?)`;
+    const regValues = [
+      request.body.name,
+      request.body.newuser,
+      request.body.newpassword,
+      request.body.email,
+    ];
+    console.log(registerUser);
+    connectDB.query(registerUser, regValues, function (error, result) {
+      if (error) {
+        console.log("Error w registration", error);
+        response.send("Error w registration");
+      } else {
+        response.redirect("/");
+      }
+    });
+  });
+});
 
-/* app.get("/home", function (request, response) {
-  if (request.session.loggedin) {
-    response.sendFile(path.join(__dirname + "/welcome.html"));
-    response.send("Welcome", +request.session.username + "!");
-  } else {
-    response.send("Your not logged in!");
-  }
-  response.end();
+// Guestbook
+app.post("/guestbook", function (request, response) {
+  connectDB.connect(function (error) {
+    const saveComment = `INSERT INTO comments (name, message) values (?, ?)`;
+    const commentValue = [request.body.guest, request.body.message];
+    console.log(saveComment);
+    connectDB.query(saveComment, commentValue, function (error, result) {
+      if (error) {
+        console.log("error while leaving comment, not saved.", error);
+        response.send("Comment not saved.");
+      } else {
+        response.redirect("welcome");
+      }
+    });
+  });
+});
+
+// Display ALL saved comments from DB table "comments"
+/* app.get("/", function (request, response) {
+  connectDB.connect(function (error) {
+    const retriveComments = `SELECT * FROM comments`;
+    connectDB.query(retriveComments, function (error, results) {
+      console.log(results);
+      if (error) {
+        console.log("Error with retriving comments", error);
+        response.send(
+          "We are having trouble showing you the comments, sorry for that!"
+        );
+      } else {
+        response.render("welcome", { comments: results });
+      }
+    });
+  });
 });
  */

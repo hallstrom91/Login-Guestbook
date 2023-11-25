@@ -12,21 +12,29 @@
       <h1>Welcome, <%= username %></h1>
       <h2>TO YOUR LOGGED IN PAGE!</h2>
     </div>
+    <!--Leave a comment in Guestbook section-->
     <div id="commentInput">
-      <form>
+      <form action="/guestbook" method="post">
         <input
-          class="inputComment"
+          class="defaultInput"
           type="text"
           name="guest"
-          placeholder="Your name"
+          placeholder="Ditt namn"
         />
         <input
-          class="inputComment"
+          class="inputCommentText"
           type="text"
           name="message"
           placeholder="Lämna en kommentar"
         />
+        <input class="submitBtn" type="submit" value="Skicka" />
       </form>
+    </div>
+    <div id="storedComments">
+      <% comments.forEach(comment => { %>
+      <p><%= comment.name %></p>
+      <p><%= comment.message %></p>
+      <% }); %>
     </div>
   </body>
 </html>
