@@ -1,0 +1,8 @@
+To run index.js
+
+NPM Install Dependencies:
+
+- mysql
+- express
+- express-session
+- ejs

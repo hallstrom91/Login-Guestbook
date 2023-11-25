@@ -3,7 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <title>Index - Login</title>
   </head>
-  <body></body>
+  <body>
+    <div id="login" class="container">
+      <form action="/login" method="post">
+        <input
+          class="inputLogin"
+          id="username"
+          type="text"
+          name="username"
+          placeholder="Username"
+        />
+        <input
+          class="inputLogin"
+          id="password"
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input class="inputLoginBtn" type="submit" value="Login" />
+      </form>
+    </div>
+    <!--JS File Import-->
+    <script src="main.js"></script>
+  </body>
 </html>

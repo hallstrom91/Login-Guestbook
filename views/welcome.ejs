@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="welcome" class="container">
+      <!--Display Username after login thru ejs-->
+      <h1>Welcome, <%= username %></h1>
+      <h2>TO YOUR LOGGED IN PAGE!</h2>
+    </div>
+    <div id="commentInput">
+      <form>
+        <input
+          class="inputComment"
+          type="text"
+          name="guest"
+          placeholder="Your name"
+        />
+        <input
+          class="inputComment"
+          type="text"
+          name="message"
+          placeholder="Lämna en kommentar"
+        />
+      </form>
+    </div>
+  </body>
+</html>

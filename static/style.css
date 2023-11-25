@@ -1,0 +1,32 @@
+/*
+=================================
+Login Page and Inputfields
+=================================
+*/
+
+.inputLogin {
+  display: block;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.inputLoginBtn {
+  border-radius: 10px;
+  display: block;
+  padding: 5px;
+  margin: 10px;
+  margin-left: 12vw;
+}
+
+/*
+=================================
+Userpage (welcome.ejs)
+=================================
+*/
+.inputComment {
+  display: block;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
+}
