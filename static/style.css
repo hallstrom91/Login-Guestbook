@@ -7,11 +7,12 @@ General Settings
 
 body {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  background-color: whitesmoke;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: (3, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 5px;
+  /* background-color: rgb(62, 62, 62); */
+  background-image: url(../images/background_big.png);
 }
 
 .defaultInput {
@@ -28,9 +29,20 @@ body {
   border-radius: 5px;
 }
 
+h1 {
+  font-family: "kdam thmor pro", sans-serif;
+}
+
 h2 {
   font-family: "kdam thmor pro", sans-serif;
-  margin-left: 0vw;
+}
+
+h3 {
+  font-family: "kdam thmor pro", sans-serif;
+}
+
+p {
+  font-family: sans-serif;
 }
 
 label {
@@ -56,16 +68,26 @@ Login / Register Page
 }
 
 .container-login {
-  grid-area: 1 / 2 / 2 / 4;
+  grid-area: 1 / 2;
   margin-top: 40px;
   padding: 10px;
   margin: 20px;
+  background-color: rgb(62, 62, 62);
+  opacity: 90%;
+  /* box-shadow: 10px 15px 40px 20px rgb(14, 154, 247); */
+  box-shadow: 0 0 20px 5px rgb(11, 113, 181);
+  border: 2px solid rgb(14, 154, 247);
+  border-radius: 5px;
 }
 
 .container-register {
-  grid-area: 2 / 2 / 3 / 4;
+  grid-area: 2 / 2;
   margin: 20px;
-  border-top: thick double black;
+  background-color: rgb(62, 62, 62);
+  opacity: 90%;
+  box-shadow: 0 0 20px 5px rgb(11, 113, 181);
+  border: 2px solid rgb(14, 154, 247);
+  border-radius: 5px;
 }
 
 .hidden {
@@ -74,7 +96,7 @@ Login / Register Page
 
 #closeReg {
   display: flex;
-  margin-left: 92%;
+  margin-left: 90%;
   margin-top: 1%;
 }
 
@@ -91,35 +113,78 @@ Userpage (welcome.ejs)
   margin: 5px;
   height: 5vh;
 }
+
 #welcome {
-  grid-area: 1 / 2 / 2 / 4;
+  grid-area: 1 / 2;
+  border: 1px solid black;
+  margin-top: 1vw;
+  margin-left: 1vw;
+  border-radius: 5px;
+  background-color: rgb(62, 62, 62);
 }
 
+/* #userInterface {
+  grid-area: 1 / 2;
+  border: 1px solid black;
+  margin-left: 1vw;
+  padding-bottom: 20px;
+  border-radius: 5px;
+} */
+
 #commentInput {
-  grid-area: 2 / 1 / 4 / 2;
+  grid-area: 2 / 2;
+  border: 1px solid black;
+  margin-top: 1vw;
+  border-radius: 5px;
+  background-color: rgb(62, 62, 62);
 }
 
 #storedComments {
-  grid-area: 1 / 4 / 5 / 5;
+  grid-area: 2 / 1;
+  border: 1px solid black;
+  margin-left: 1vw;
+  border-radius: 5px;
+  background-color: rgb(62, 62, 62);
 }
+
+#logoutBtn {
+  margin-left: 1vw;
+  margin-bottom: 2vw;
+}
+
+#forumBtn {
+  display: inline-block;
+  margin-left: 5vw;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.commentBox {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(120, 119, 119);
+}
+
+.topics {
+  text-align: center;
+}
+
 /*
 ========================
 Dark and Light Mode !
 ========================
 */
 
-.darkmodeText {
+/* .darkmodeText {
   font-size: 12px;
 }
 .switchContainer {
-  grid-area: 1 / 4 / 2 / 5;
+  grid-area: 1 / 3;
   margin-top: 10%;
   margin-left: 50%;
-}
-
-.lightMode {
-  background-color: whitesmoke;
-  color: black;
 }
 
 .darkMode {
@@ -129,7 +194,7 @@ Dark and Light Mode !
 
 /* Button Settings for Dark & Light Mode */
 
-.switch {
+/* .switch {
   margin-top: 5px;
   position: relative;
   display: inline-block;
@@ -180,4 +245,25 @@ input:checked + .switchSlide::before {
   -webkit-transform: translateX(25px);
   -ms-transform: translateX(25px);
   transform: translateX(25px);
-}
+}  */
+
+/*
+========================
+Media Querys
+========================
+*/
+
+/* @media only screen and (min-width: 768px) {
+  #welcome {
+    grid-area: 1 / 1;
+  }
+  #userInterface {
+    grid-area: 2 / 1;
+  }
+  #commentinput {
+    grid-area: 3 / 1;
+  }
+  #storedComments {
+    grid-area: 4 / 1;
+  }
+} */

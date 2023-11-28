@@ -4,41 +4,64 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Welcome</title>
   </head>
-  <body>
-    <div id="welcome" class="container">
-      <!--Display Username after login thru ejs-->
-      <h1>Welcome, <%= username %></h1>
-      <h2>TO YOUR LOGGED IN PAGE!</h2>
-      <form action="/logout" method="get">
-        <input class="button" type="submit" value="Logga ut" />
-      </form>
-    </div>
-    <!--Leave a comment in Guestbook section-->
-    <div id="commentInput">
-      <form action="/guestbook" method="post">
-        <input
-          class="defaultInput"
-          type="text"
-          name="guest"
-          placeholder="Ditt namn"
-        />
-        <input
-          class="inputCommentText"
-          type="text"
-          name="message"
-          placeholder="Lämna en kommentar"
-        />
-        <input class="submitBtn" type="submit" value="Skicka" />
-      </form>
-    </div>
+  <body class="darkMode">
+    <!--Welcome User-->
+    <main>
+      <div id="welcome" class="container">
+        <!--Display Username after login thru ejs-->
+        <h1 class="topics">Welcome, <%= username %>!</h1>
+        <h2 class="topics">TO YOUR PERSONAL PAGE!</h2>
+        <!--Logout Button-->
+        <form action="/logout" method="get">
+          <input class="button" id="logoutBtn" type="submit" value="Logga ut" />
+        </form>
+      </div>
+    </main>
+    <!--User Interface Section-->
+    <!--     <div id="userInterface">
+        <h2 class="topics">User Interface</h2>
+        <form action="/" method="">
+          <input class="button" id="forumBtn" type="submit" value="Forum" />
+        </form>
+      </div>
+    </main> -->
+    <!--Leave a comment section-->
+    <section>
+      <div id="commentInput">
+        <h3 class="topics">Lämna en anonym kommentar i sidans gästbok!</h3>
+        <form action="/guestbook" method="post">
+          <input
+            class="defaultInput"
+            type="text"
+            name="guest"
+            placeholder="Ditt namn"
+          />
+          <input
+            class="inputCommentText"
+            type="text"
+            name="message"
+            placeholder="Lämna en kommentar"
+          />
+          <input class="submitBtn" type="submit" value="Skicka" />
+        </form>
+      </div>
+    </section>
+
     <!--Stored Comments retrived from SQL DB-->
-    <div id="storedComments">
-      <% comments.forEach(comment => { %>
-      <p><%= comment.name %></p>
-      <p><%= comment.message %></p>
-      <% }); %>
-    </div>
+    <content>
+      <div id="storedComments">
+        <h2 class="topics">Gästboken!</h2>
+        <% comments.forEach(comment => { %>
+        <div class="commentBox">
+          <p class="bold">Från: <%= comment.name %></p>
+          <p class="bold">Inlägg:</p>
+          <p><%= comment.message %></p>
+        </div>
+        <% }); %>
+      </div>
+    </content>
+    <script src="welcome.js"></script>
   </body>
 </html>

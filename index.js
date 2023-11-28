@@ -1,4 +1,9 @@
-// init requirements
+/*
+====================================
+Init requirements
+====================================
+*/
+
 const mysql = require("mysql");
 const express = require("express");
 const session = require("express-session");
@@ -10,7 +15,11 @@ const port = 8080;
 app.listen(port);
 app.set("view engine", "ejs");
 
-//Establish connection to mySQL DB.
+/*
+====================================
+Establish connection to mySQL DB.
+====================================
+*/
 const connectDB = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -26,12 +35,11 @@ connectDB.connect((error) => {
   }
 });
 
-/* // init express env
-const app = express();
-const port = 8080; */
-
-/* app.listen(port);
-app.set("view engine", "ejs"); */
+/*
+====================================
+App requirements
+====================================
+*/
 
 app.use(
   session({
@@ -49,12 +57,12 @@ app.get("/", function (request, response) {
   response.sendFile(path.join(__dirname + "/index.html"));
 });
 
-//redirect test
-/* app.get("/welcome", function (request, response) {
-  response.render("welcome.ejs");
-}); */
+/*
+====================================
+Auth for login
+====================================
+*/
 
-//auth for login
 app.post("/login", function (request, response) {
   //get info from login inputfields
   let username = request.body.username;
@@ -79,34 +87,19 @@ app.post("/login", function (request, response) {
       }
     );
   } else {
-    response.send("No values in input!");
+    response.send("Missing value in inputfield.");
     response.end();
   }
 });
 
-// load welcome page from views-folder in .ejs format for logged in user and show saved comments
-app.get("/welcome", function (request, response) {
-  if (request.session.loggedin) {
-    connectDB.connect(function (error) {
-      const retriveComments = `SELECT * FROM comments`;
-      connectDB.query(retriveComments, function (error, results) {
-        if (error) {
-          console.log("Error with retriving comments", error);
-          response.send("We cant retrive comments at this moment.");
-        } else {
-          response.render("welcome", {
-            username: request.session.username,
-            comments: results,
-          });
-        }
-      });
-    });
-  } else {
-    response.redirect("/login");
-  }
-});
+/*
+====================================
+registration function 
+w (little) SQL-injection protection 
+thru prepared statements
+====================================
+*/
 
-// registration function w (little) SQL-injection protection thru prepared statements
 app.post("/register", function (request, response) {
   connectDB.connect(function (error) {
     const registerUser = `INSERT INTO register (name, username, password, email)
@@ -129,24 +122,82 @@ app.post("/register", function (request, response) {
   });
 });
 
-// Guestbook
+/*
+====================================
+load welcome page from views-folder
+ in .ejs format for logged in user 
+ and show saved comments
+====================================
+*/
+
+app.get("/welcome", function (request, response) {
+  if (request.session.loggedin) {
+    connectDB.connect(function (error) {
+      const retriveComments = `SELECT * FROM comments`;
+      connectDB.query(retriveComments, function (error, results) {
+        if (error) {
+          console.log("Error with retriving comments", error);
+          response.send("We cant retrive comments at this moment.");
+        } else {
+          response.render("welcome", {
+            username: request.session.username,
+            comments: results,
+          });
+        }
+      });
+    });
+  } else {
+    response.redirect("/login");
+  }
+});
+
+/*
+====================================
+Guestbook with mySQL injection 
+security and no empty input
+====================================
+*/
+
 app.post("/guestbook", function (request, response) {
   connectDB.connect(function (error) {
-    const saveComment = `INSERT INTO comments (name, message) values (?, ?)`;
-    const commentValue = [request.body.guest, request.body.message];
-    console.log(saveComment);
-    connectDB.query(saveComment, commentValue, function (error, result) {
-      if (error) {
-        console.log("error while leaving comment, not saved.", error);
-        response.send("Comment not saved.");
-      } else {
-        response.redirect("welcome");
-      }
-    });
+    //Get values from comment input
+    const guest = request.body.guest;
+    const message = request.body.message;
+    //check to secure no empty input with logical operator "!".
+    if (!guest && !message) {
+      console.log("Both fields are required for leaving a comment!");
+      response.send("Vänligen fyll i båda fälten!");
+      return;
+    } else if (!guest) {
+      console.log("Name value is missing.");
+      response.send("Fyll i ditt namn.");
+      return;
+    } else if (!message) {
+      console.log("Message value is missing.");
+      response.send("Skriv ett meddelanden!");
+      return;
+    } else {
+      // if no empty values, save info to DB.
+      const insertComment = `INSERT INTO comments (name, message) values (?, ?)`;
+      const commentValue = [request.body.guest, request.body.message];
+
+      connectDB.query(insertComment, commentValue, function (error, result) {
+        if (error) {
+          console.log("Comment can not be saved at this moment, sorry.", error);
+          response.send("Kommentaren går inte att spara just nu. Beklagar.");
+        } else {
+          response.redirect("welcome");
+        }
+      });
+    }
   });
 });
 
-//logout
+/*
+====================================
+User logout
+====================================
+*/
 
 app.get("/logout", function (request, response) {
   request.session.destroy(function (error) {

@@ -15,7 +15,7 @@ Toggle Dark / Light Mode
 ======================== 
 */
 
-switchButton.addEventListener("click", switchTheme);
+/* switchButton.addEventListener("click", switchTheme);
 
 function switchTheme() {
   // Connect elements
@@ -23,7 +23,7 @@ function switchTheme() {
 
   // Change color of elements
   bodyElement.classList.toggle("darkMode");
-}
+} */
 
 /*
 ========================

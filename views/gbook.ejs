@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Guestbook</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="commentInput">
+      <h2>Lämna en kommentar!</h2>
+      <form action="/guestbook" method="post">
+        <input
+          class="defaultInput"
+          type="text"
+          name="guest"
+          placeholder="Ditt namn"
+        />
+        <input
+          class="inputCommentText"
+          type="text"
+          name="message"
+          placeholder="Lämna en kommentar"
+        />
+        <input class="submitBtn" type="submit" value="Skicka" />
+      </form>
+    </div>
+    <!--Stored Comments retrived from SQL DB-->
+    <div id="storedComments">
+      <h2>Gästboken!</h2>
+      <% comments.forEach(comment => { %>
+      <div class="commentBox">
+        <p class="bold"><%= comment.name %></p>
+        <p><%= comment.message %></p>
+      </div>
+      <% }); %>
+    </div>
+    <!--Switchbutton for dark/light mode-->
+    <div class="switchContainer">
+      <p class="darkmodeText">DarkMode</p>
+      <label for="switchBtn" class="switch">
+        <input type="checkbox" id="switchBtn" />
+        <span class="switchSlide"></span>
+      </label>
+    </div>
+    <!--JS File Import-->
+    <script src=""></script>
+  </body>
+</html>

@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="style.css" />
     <title>Index - Login</title>
   </head>
-  <body class="lightMode">
+  <body class>
     <!--Container for login function-->
     <div id="login" class="container-login">
-      <h2>Logga In!</h2>
+      <h2 class="topics">Logga In!</h2>
       <!--Form to login w user in mySQL DB-->
       <form action="/login" method="post">
         <input
@@ -32,7 +32,6 @@
         <input class="submitBtn" type="submit" value="Login" />
       </form>
       <!--Button to show register box-->
-
       <input
         type="button"
         value="Registrera Konto!"
@@ -40,11 +39,12 @@
         id="regPopUp"
       />
     </div>
+
     <!--Container for register function-->
     <div id="register" class="hidden">
       <!--Button to close register-box-->
       <input class="button" type="button" value="Stäng" id="closeReg" />
-      <h2>Registrera Konto!</h2>
+      <h2 class="topics">Registrera Konto!</h2>
       <!--Form to register user to mySQL DB-->
       <form action="/register" method="post">
         <input
@@ -74,14 +74,7 @@
         <input class="submitBtn" type="submit" value="Registrera" />
       </form>
     </div>
-    <!--Switchbutton for dark/light mode-->
-    <div class="switchContainer">
-      <p class="darkmodeText">DarkMode</p>
-      <label for="switchBtn" class="switch">
-        <input type="checkbox" id="switchBtn" />
-        <span class="switchSlide"></span>
-      </label>
-    </div>
+
     <!--JS File Import-->
     <script src="main.js"></script>
   </body>
