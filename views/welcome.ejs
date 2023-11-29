@@ -11,8 +11,7 @@
     <main>
       <div id="welcome" class="container">
         <!--Display Username after login thru ejs-->
-        <h1 class="topics">Welcome, <%= username %>!</h1>
-        <h2 class="topics">TO YOUR PERSONAL PAGE!</h2>
+        <h1 class="topics">Välkommen, <%= username %>!</h1>
         <!--Logout Button-->
         <form action="/logout" method="get">
           <input class="button" id="logoutBtn" type="submit" value="Logga ut" />
@@ -30,7 +29,7 @@
     <!--Leave a comment section-->
     <section>
       <div id="commentInput">
-        <h3 class="topics">Lämna en anonym kommentar i sidans gästbok!</h3>
+        <h3 class="topics">Lämna en kommentar i gästboken!</h3>
         <form action="/guestbook" method="post">
           <input
             class="defaultInput"
@@ -55,13 +54,14 @@
         <h2 class="topics">Gästboken!</h2>
         <% comments.forEach(comment => { %>
         <div class="commentBox">
-          <p class="bold">Från: <%= comment.name %></p>
+          <p class="boldName">Från: <%= comment.name %></p>
           <p class="bold">Inlägg:</p>
           <p><%= comment.message %></p>
         </div>
         <% }); %>
       </div>
     </content>
-    <script src="welcome.js"></script>
+    <!--JS File Import-->
+    <script src="/"></script>
   </body>
 </html>

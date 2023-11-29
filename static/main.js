@@ -4,26 +4,9 @@ Setup !
 ======================== 
 */
 
-const switchButton = document.getElementById("switchBtn");
 const viewPassword = document.getElementById("viewPassword");
 const registerBtn = document.getElementById("regPopUp");
 const closeReg = document.getElementById("closeReg");
-
-/*
-========================
-Toggle Dark / Light Mode
-======================== 
-*/
-
-/* switchButton.addEventListener("click", switchTheme);
-
-function switchTheme() {
-  // Connect elements
-  let bodyElement = document.body;
-
-  // Change color of elements
-  bodyElement.classList.toggle("darkMode");
-} */
 
 /*
 ========================
@@ -43,7 +26,7 @@ function passwordViewer() {
 
 /*
 ========================
-Register Button
+Register Button Open/Close
 ======================== 
 */
 registerBtn.addEventListener("click", function () {

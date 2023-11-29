@@ -80,6 +80,7 @@ app.post("/login", function (request, response) {
           request.session.username = username;
           // redirect to page
           response.redirect("/welcome");
+          console.log("User login request accepted");
         } else {
           response.send("Incorrect credentials");
         }
@@ -205,6 +206,6 @@ app.get("/logout", function (request, response) {
       console.log("Logout not possible, your are here forever.", error);
     }
     response.sendFile(path.join(__dirname + "/index.html"));
-    console.log("User logged out");
+    console.log("User logout request accepted");
   });
 });
