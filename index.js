@@ -1,3 +1,15 @@
+/* 
+!!! START OF INFO !!!
+
+database name = nodejs_login
+table for registered users = register
+table for saved comments = comments
+
+Change values to connect to your own database.
+
+!!! END OF INFO !!!
+*/
+
 /*
 ====================================
 Init requirements
@@ -21,10 +33,10 @@ Establish connection to mySQL DB.
 ====================================
 */
 const connectDB = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "nodejs_login",
+  host: "localhost", // change to correct adress
+  user: "root", // change to correct location
+  password: "", // change to correct password
+  database: "nodejs_login", // change to correct DB
 });
 
 connectDB.connect((error) => {
@@ -103,23 +115,42 @@ thru prepared statements
 
 app.post("/register", function (request, response) {
   connectDB.connect(function (error) {
-    const registerUser = `INSERT INTO register (name, username, password, email)
-    VALUES (?, ?, ?, ?)`;
-    const regValues = [
-      request.body.name,
-      request.body.newuser,
-      request.body.newpassword,
-      request.body.email,
-    ];
-    console.log(registerUser);
-    connectDB.query(registerUser, regValues, function (error, result) {
-      if (error) {
-        console.log("Error w registration", error);
-        response.send("Error w registration");
-      } else {
-        response.redirect("/");
-      }
-    });
+    //prepared statements to avoid SQL-injection
+    const userName = request.body.name;
+    const userNick = request.body.newuser;
+    const userPW = request.body.newpassword;
+    const userMail = request.body.email;
+
+    if (!userName) {
+      console.log("Missing values in registration form");
+      response.send("Fyll i ALLA fält.");
+    } else if (!userNick) {
+      console.log("Missing values in registration form");
+      response.send("Fyll i ALLA fält.");
+    } else if (!userPW) {
+      console.log("Missing values in registration form");
+      response.send("Fyll i ALLA fält.");
+    } else if (!userMail) {
+      console.log("Missing values in registration form");
+      response.send("Fyll i ALLA fält.");
+    } else {
+      //Insert user into DB.
+      const regUser = `INSERT INTO register (name, username, password, email) 
+    VALUES (?, ?, ?, ?)`; // connect to correct DB for registered users
+      //collect all values to One
+      const allValues = [userName, userNick, userPW, userMail];
+      connectDB.query(regUser, allValues, function (error, result) {
+        if (error) {
+          console.log("Error with registration!", error);
+          response.send(
+            "Tyvärr har det uppstått något problem med registreringen."
+          );
+        } else {
+          response.redirect("/");
+          console.log("User registered");
+        }
+      });
+    }
   });
 });
 
@@ -134,7 +165,7 @@ load welcome page from views-folder
 app.get("/welcome", function (request, response) {
   if (request.session.loggedin) {
     connectDB.connect(function (error) {
-      const retriveComments = `SELECT * FROM comments`;
+      const retriveComments = `SELECT * FROM comments`; // connect to correct DB for comments
       connectDB.query(retriveComments, function (error, results) {
         if (error) {
           console.log("Error with retriving comments", error);
@@ -179,7 +210,7 @@ app.post("/guestbook", function (request, response) {
       return;
     } else {
       // if no empty values, save info to DB.
-      const insertComment = `INSERT INTO comments (name, message) values (?, ?)`;
+      const insertComment = `INSERT INTO comments (name, message) values (?, ?)`; //connect to correct DB for comments
       const commentValue = [request.body.guest, request.body.message];
 
       connectDB.query(insertComment, commentValue, function (error, result) {

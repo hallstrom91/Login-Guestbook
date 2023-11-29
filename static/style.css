@@ -71,7 +71,6 @@ Login / Register Page
   margin-top: 40px;
   padding: 10px;
   margin: 20px;
-  /* background-color: rgb(62, 62, 62); */
   opacity: 90%;
   box-shadow: 0 0 20px 5px rgb(11, 113, 181);
   border: 2px solid rgb(14, 154, 247);
@@ -84,7 +83,6 @@ Login / Register Page
 .container-register {
   grid-area: 2 / 2;
   margin: 20px;
-  /*   background-color: rgb(62, 62, 62); */
   opacity: 90%;
   box-shadow: 0 0 20px 5px rgb(11, 113, 181);
   border: 2px solid rgb(14, 154, 247);
