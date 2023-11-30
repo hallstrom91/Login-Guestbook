@@ -2,10 +2,34 @@
 !!! START OF INFO !!!
 
 database name = nodejs_login
-table for registered users = register
-table for saved comments = comments
 
-Change values to connect to your own database.
+table 1 for registered users = name: register
+register (name, username, password, email)
+
+CREATE TABLE IF NOT EXISTS `register` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+table 2 for saved comments = name: comments
+comments (name, message)
+
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `message` varchar(2000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+
+
+Or Change values to connect to your own database below!
 
 !!! END OF INFO !!!
 */
@@ -169,7 +193,7 @@ app.get("/welcome", function (request, response) {
       connectDB.query(retriveComments, function (error, results) {
         if (error) {
           console.log("Error with retriving comments", error);
-          response.send("We cant retrive comments at this moment.");
+          response.send("Kommentarer kan inte visas för tillfället.");
         } else {
           response.render("welcome", {
             username: request.session.username,
@@ -234,7 +258,7 @@ User logout
 app.get("/logout", function (request, response) {
   request.session.destroy(function (error) {
     if (error) {
-      console.log("Logout not possible, your are here forever.", error);
+      console.log("Logout not possible, user is here forever.", error);
     }
     response.sendFile(path.join(__dirname + "/index.html"));
     console.log("User logout request accepted");
