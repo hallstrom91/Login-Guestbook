@@ -224,10 +224,6 @@ app.post("/guestbook", function (request, response) {
       console.log("Both fields are required for leaving a comment!");
       response.send("Vänligen fyll i båda fälten!");
       return;
-    } else if (!guest) {
-      console.log("Name value is missing.");
-      response.send("Fyll i ditt namn.");
-      return;
     } else if (!message) {
       console.log("Message value is missing.");
       response.send("Skriv ett meddelanden!");
@@ -235,7 +231,7 @@ app.post("/guestbook", function (request, response) {
     } else {
       // if no empty values, save info to DB.
       const insertComment = `INSERT INTO comments (name, message) values (?, ?)`; //connect to correct DB for comments
-      const commentValue = [request.body.guest, request.body.message];
+      const commentValue = [request.session.username, request.body.message];
 
       connectDB.query(insertComment, commentValue, function (error, result) {
         if (error) {
