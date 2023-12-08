@@ -210,7 +210,7 @@ app.get("/welcome", function (request, response) {
 /*
 ====================================
 Guestbook with mySQL injection 
-security and no empty input
+security and no empty input !
 ====================================
 */
 
