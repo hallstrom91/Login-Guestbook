@@ -86,11 +86,11 @@ app.use(
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "static")));
+app.use(express.static(path.join(__dirname, "../static")));
 
 // load HTML pages
 app.get("/", function (request, response) {
-  response.sendFile(path.join(__dirname, "./public/index.html"));
+  response.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 /*
